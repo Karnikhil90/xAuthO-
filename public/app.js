@@ -28,25 +28,35 @@ function renderSignUpForm() {
   `;
 }
 
-// Simulated backend authentication using localStorage
-function fakeAuth({ email, password }) {
-  const savedUser = JSON.parse(localStorage.getItem('user'));
-  return savedUser && savedUser.email === email && savedUser.password === password;
-}
-
 // Handle login form submission
 function handleLoginForm() {
   const form = document.getElementById('login-form');
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const email = form.email.value.trim();
     const password = form.password.value.trim();
 
-    if (fakeAuth({ email, password })) {
-      alert('Login Success! Redirecting...');
-      window.location.href = '/welcome/index.html'; // 🔁 Redirect
-    } else {
-      alert('Invalid credentials or user not registered.');
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const result = await res.json();
+      alert(result.message);
+
+      if (res.ok) {
+        // ✅ Save user to localStorage
+        localStorage.setItem('auth_user', JSON.stringify(result.user || { email }));
+
+        // ✅ Redirect to welcome page
+        window.location.href = '/welcome';
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      alert('Login failed.');
     }
   });
 }
@@ -54,7 +64,7 @@ function handleLoginForm() {
 // Handle registration form submission
 function handleRegisterForm() {
   const form = document.getElementById('register-form');
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = form.name.value.trim();
@@ -63,9 +73,21 @@ function handleRegisterForm() {
     const password = form.password.value.trim();
 
     const newUser = { name, age, email, password };
-    localStorage.setItem('user', JSON.stringify(newUser));
-    alert('Account created. You can now sign in!');
-    navigate('signin');
+
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser)
+      });
+
+      const result = await res.json();
+      alert(result.message);
+      if (res.ok) navigate('signin');
+    } catch (err) {
+      console.error('Register error:', err);
+      alert('Failed to register.');
+    }
   });
 }
 
@@ -89,10 +111,19 @@ function navigate(view) {
 }
 
 // 🚀 Auto-login if user already exists
-const existingUser = JSON.parse(localStorage.getItem('user'));
-if (existingUser && existingUser.email && existingUser.password) {
+const existingUser = JSON.parse(localStorage.getItem('auth_user'));
+
+if (existingUser && existingUser.email) {
   console.log('Auto-login with saved credentials');
-  window.location.href = '/welcome.html';
+
+  // Add delay (e.g. 2000 ms = 2 seconds)
+  alert("Auto-login with saved credentials")
+  setTimeout(() => {
+    
+    window.location.href = '/welcome';
+
+  }, 2000);
+
 } else {
   navigate('signin');
 }
