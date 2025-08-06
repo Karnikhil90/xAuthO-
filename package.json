@@ -1,0 +1,15 @@
+{
+  "name": "xAuthO",
+  "version": "0.2",
+  "description": "Simple login/signup app using Node.js, Express, and static frontend",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "sudo node server/server.js"
+  },
+  "author": "Nikhil Karmakar, Amrit Rajput",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

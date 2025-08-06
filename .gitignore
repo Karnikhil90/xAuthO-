@@ -1,0 +1,10 @@
+# some private auth
+.env
+
+
+# package
+node_modules
+
+
+# code editor
+.vscode
