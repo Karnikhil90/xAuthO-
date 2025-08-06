@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>xAuth</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Static Background / Decorative elements -->
+  <div id="background"></div>
+
+  <!-- Root container -->
+  <div id="root">
+    <!-- Main sign-in/up container -->
+    <div id="sign_in">
+
+      <!-- Static toggle between Sign In / Sign Up -->
+      <div id="span_sign">
+        <button id="btn-signin" class="active" onclick="navigate('signin')">Sign In</button>
+        <button id="btn-signup" onclick="navigate('signup')">Sign Up</button>
+      </div>
+
+      <!-- Form content dynamically changes here -->
+      <div id="auth_form">
+        <!-- JS will inject the active form here -->
+      </div>
+
+    </div>
+
+    <!-- Footer (static) -->
+    <div id="footer">
+      © 2025 xAuth. Secure sign-in. All rights reserved.
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

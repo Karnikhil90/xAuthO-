@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6fc;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Static BG element */
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  z-index: -1;
+  opacity: 0.15;
+}
+
+/* Main layout */
+#root {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+#span_sign {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+#span_sign button {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  background-color: #eaeaea;
+  color: #333;
+  border-radius: 8px 8px 0 0;
+  transition: background 0.3s;
+}
+
+#span_sign button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+#auth_form h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+form input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+form button[type="submit"] {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
