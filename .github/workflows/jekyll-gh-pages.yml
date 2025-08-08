@@ -37,10 +37,6 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-      - name: Upload static content (from ./public)
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public  # 👈 This is your website root folder
 
   # Deployment job
   deploy:
